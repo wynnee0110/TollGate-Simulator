@@ -16,7 +16,7 @@ SPAWN_INTERVAL = 2000
 # Toll settings
 TOLL_WIDTH = 80
 TOLL_HEIGHT = 60
-TOLL_FEES = [30, 50, 70]
+TOLL_FEES = [10, 20 ,30 , 50]
 PAYMENTS = [50, 100, 200]
 
 # UI settings
