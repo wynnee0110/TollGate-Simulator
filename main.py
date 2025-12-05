@@ -5,6 +5,9 @@ from config import *
 from game_logic import TollSimulator
 from ui_components import Button
 
+
+pygame.mixer.init()
+
 def main():
     """Main game loop"""
     pygame.init()

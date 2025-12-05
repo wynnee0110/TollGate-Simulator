@@ -8,6 +8,10 @@ from config import *
 from car import Car
 from ui_components import ParticleSystem, Button
 
+
+"""Sound Effects"""
+
+
 class TollSimulator:
     """Main game logic for the toll simulator"""
     
@@ -40,7 +44,11 @@ class TollSimulator:
         self.grid_start_x = 0
         self.grid_start_y = 0
         self.buttons = []
-        self.update_button_positions()
+
+        # LOAD SOUNDS HERE
+        self.cash_sound = pygame.mixer.Sound("sounds/cash.wav")
+        self.wrong_sound = pygame.mixer.Sound("sounds/wrong.wav")
+        self.background_sound = pygame.mixer.Sound("")
 
     def reset_game(self):
         """Reset game state for new game"""
@@ -131,10 +139,13 @@ class TollSimulator:
             self.score += 1
             self.streak += 1
             self.particles.add_particles(self.TOLL_X + TOLL_WIDTH // 2, self.LANE_Y, GREEN)
+            self.cash_sound.play()
+            
         else:
             self.lives -= 1
             self.streak = 0
             self.particles.add_particles(self.TOLL_X + TOLL_WIDTH // 2, self.LANE_Y, RED)
+            self.wrong_sound.play()
         
         self.queue.popleft()
         self.user_input = 0
