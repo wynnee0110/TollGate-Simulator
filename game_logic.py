@@ -9,7 +9,7 @@ from car import Car
 from ui_components import ParticleSystem, Button
 
 
-"""Sound Effects"""
+
 
 
 class TollSimulator:
@@ -48,7 +48,12 @@ class TollSimulator:
         # LOAD SOUNDS HERE
         self.cash_sound = pygame.mixer.Sound("sounds/cash.wav")
         self.wrong_sound = pygame.mixer.Sound("sounds/wrong.wav")
-        self.background_sound = pygame.mixer.Sound("")
+        self.start_sound = pygame.mixer.Sound("sounds/start.wav")
+        self.over_sound = pygame.mixer.Sound("sounds/over.wav")
+        self.fah_sound = pygame.mixer.Sound("sounds/fah.wav")
+        
+
+        
 
     def reset_game(self):
         """Reset game state for new game"""
@@ -151,7 +156,10 @@ class TollSimulator:
         self.user_input = 0
         
         if self.lives <= 0:
+            self.over_sound.play()
+            self.fah_sound.play()
             self.game_over = True
+
 
     def update(self):
         """Update game state"""
@@ -171,6 +179,8 @@ class TollSimulator:
         
         # Check for game over
         if len(self.queue) >= MAX_QUEUE_VISUAL:
+            self.fah_sound.play()
+            self.over_sound.play()
             self.game_over = True
 
     def draw(self, screen):

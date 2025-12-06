@@ -8,7 +8,14 @@ from ui_components import Button
 
 pygame.mixer.init()
 
+
+
 def main():
+    start_sound = pygame.mixer.Sound("sounds/start.wav")
+    over_sound = pygame.mixer.Sound("sounds/over.wav")
+
+    
+
     """Main game loop"""
     pygame.init()
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
@@ -38,6 +45,7 @@ def main():
         clock.tick(FPS)
         mouse_pos = pygame.mouse.get_pos()
         
+        
         # Event handling
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -55,11 +63,16 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if in_main_menu:
                     if start_button.is_clicked(event.pos):
+                        start_sound.play()
                         in_main_menu = False
                         game.reset_game()
                 elif game.game_over:
                     if try_again_button.is_clicked(event.pos):
                         game.reset_game()
+                        game.start_sound.stop()
+                        game.over_sound.stop()
+                        game.fah_sound.stop()
+                        game.start_sound.play()
                     elif quit_button.is_clicked(event.pos):
                         in_main_menu = True
                         background_game.reset_game()
@@ -72,6 +85,7 @@ def main():
                           mouse_pos, title_font, subtitle_font)
             pygame.display.flip()
             continue
+        
         
         # Game Over Screen
         if game.game_over:
@@ -98,7 +112,7 @@ def draw_main_menu(screen, background_game, start_button, high_score,
                    mouse_pos, title_font, subtitle_font):
     """Draw the main menu with animated background"""
     # Animated background
-    background_game.spawn_car()
+    
     background_game.update()
     background_game.draw(screen)
     
@@ -129,6 +143,10 @@ def draw_main_menu(screen, background_game, start_button, high_score,
     # Start button
     start_button.update_hover(mouse_pos)
     start_button.draw(screen)
+    
+
+    
+
 
 
 def draw_game_over(screen, game, try_again_button, quit_button, 
