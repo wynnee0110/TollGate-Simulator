@@ -9,9 +9,6 @@ from car import Car
 from ui_components import ParticleSystem, Button
 
 
-
-
-
 class TollSimulator:
     """Main game logic for the toll simulator"""
     

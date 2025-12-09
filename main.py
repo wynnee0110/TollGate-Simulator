@@ -75,6 +75,9 @@ def main():
                         game.start_sound.play()
                     elif quit_button.is_clicked(event.pos):
                         in_main_menu = True
+                        game.start_sound.stop()
+                        game.over_sound.stop()
+                        game.fah_sound.stop()
                         background_game.reset_game()
                 else:
                     game.handle_click(event.pos)
